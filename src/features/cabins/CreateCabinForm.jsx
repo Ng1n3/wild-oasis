@@ -50,8 +50,8 @@ function CreateCabinForm({ cabinToEdit = {} }) {
 
     // const image = data.image && data.image.length > 0 ? data.image[0] : null;
 
-    console.log("Form data", data);
-    console.log("image:",image);
+    // console.log("Form data", data);
+    // console.log("image:",image);
 
     if (isEditSession)
       editCabin({ newCabinData: { ...data, image }, id: editId });
