@@ -21,13 +21,9 @@ export async function createEditCabin(newCabin, id) {
     ""
   );
 
-  // console.log("Image name: ",imageName)
-
   const imagePath = hasImagePath
     ? newCabin.image
     : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
-
-  // console.log("imagePath", imagePath)
 
   //1. create/edit cabin
   let query = supabase.from("cabin");
@@ -59,7 +55,6 @@ export async function createEditCabin(newCabin, id) {
       );
   }
 
-  console.log("image data", data);
   return data;
 }
 
