@@ -21,33 +21,37 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 
   const { errors } = formState;
   const { isCreating, createCabin } = useCreateCabin();
-  const { isEditing, editCabin } = useUpdateCabin();
+  const { isUpdating, updateCabin } = useUpdateCabin();
 
   console.log("error from formState", errors);
 
-  const isWorking = isCreating || isEditing;
+  const isWorking = isCreating || isUpdating;
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
-    if (isEditSession)
-      editCabin(
+    if (isEditSession) {
+      console.log("Is edit session", isEditSession);
+      updateCabin(
         { newCabinData: { ...data, image }, id: editId },
         {
           onSuccess: () => {
             reset();
-            onCloseModal?.()
+            onCloseModal?.();
           },
         }
       );
-    createCabin(
-      { ...data, image: image },
-      {
-        onSuccess: () => {
-          reset();
-          onCloseModal?.()
-        },
-      }
-    );
+    } else {
+      console.log("create Cabin", isEditSession);
+      createCabin(
+        { ...data, image: image },
+        {
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
+        }
+      );
+    }
   }
 
   function onError(errors) {
@@ -55,7 +59,10 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModal ? 'modal' : 'regular'}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="name" error={errors?.name?.message}>
         <Input
           type="text"
