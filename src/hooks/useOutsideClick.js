@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export function useOutsideClick({ close, listeningCaputring = true }) {
+export function useOutsideClick( close, listeningCaputring = true ) {
   const ref = useRef();
 
   useEffect(
