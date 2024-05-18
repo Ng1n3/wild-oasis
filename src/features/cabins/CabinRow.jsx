@@ -114,7 +114,7 @@ function CabinRow({ cabin }) {
           </Modal.Window>
         </Modal>
       </div>
-    </=>
+    </Table.Row>
   );
 }
 
@@ -127,7 +127,7 @@ CabinRow.propTypes = {
     discount: PropTypes.number.isRequired,
     description: PropTypes.string,
     image: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default CabinRow;
