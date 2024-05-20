@@ -36,7 +36,7 @@ Select.propTypes = {
     })
   ).isRequired,
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.node,
+  onChange: PropTypes.func,
 };
 
 export default Select;

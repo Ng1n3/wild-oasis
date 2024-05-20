@@ -1,7 +1,7 @@
 import { getToday } from "../utils/helpers";
 import supabase from "./supaBase";
 
-export async function getBookings({ filter }) {
+export async function getBookings({ filter, sortBy }) {
   let query = supabase
     .from("bookings")
     .select(
@@ -9,17 +9,22 @@ export async function getBookings({ filter }) {
     );
 
   // FILTER
-  if (filter !== null) query = query.eq(filter.field, filter.value);
+  if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
 
-  const { data:bookings, error } = await query;
+  // SORT
+  if (sortBy)
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === "asc",
+    });
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
     throw new Error("Bookings could not be loaded");
   }
 
-  console.log("data from apiBookings", bookings);
-  return bookings;
+  return data;
 }
 
 export async function getBooking(id) {

@@ -61,11 +61,11 @@ function Filter({ filterField, options }) {
 }
 
 Filter.propTypes = {
-  filterField: PropTypes.string,
+  filterField: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.string,
-      label: PropTypes.string,
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

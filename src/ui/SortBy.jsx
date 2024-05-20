@@ -1,7 +1,7 @@
-import Proptypes from "prop-types";
+import PropTypes from "prop-types";
+import { useSearchParams } from "react-router-dom";
 
 import Select from "./Select";
-import { useSearchParams } from "react-router-dom";
 
 function SortBy({ options }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,7 +17,7 @@ function SortBy({ options }) {
       options={options}
       value={sortBy}
       type="white"
-      onChan ge={handleChange}
+      onChange={handleChange}
     >
       SortBy
     </Select>
@@ -25,7 +25,13 @@ function SortBy({ options }) {
 }
 
 SortBy.propTypes = {
-  options: Proptypes.node,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onChange: PropTypes.func,
 };
 
 export default SortBy;
